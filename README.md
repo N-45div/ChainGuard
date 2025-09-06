@@ -1,161 +1,265 @@
-# 🛡️ ChainGuard - Multi-Chain Crime Detection MCP Server
+# ChainGuard - Multi-Chain Blockchain Crime Detection MCP Server
 
-**Aya AI Hackathon Taipei Edition Submission**
+ChainGuard is an AI-powered MCP server that enables Claude Desktop to perform real-time blockchain crime detection and forensic analysis across Bitcoin, Ethereum, Hedera, and Solana networks through natural language conversations.
 
-ChainGuard is a comprehensive blockchain crime detection system built as an MCP (Model Context Protocol) server. It provides real-time analysis and risk assessment across Bitcoin, Ethereum, Hedera, and Solana networks to identify suspicious activities, fraud patterns, and criminal behavior.
+## 📋 Detailed Project Description
 
----
+ChainGuard revolutionizes blockchain security by bringing sophisticated crime detection capabilities directly into AI assistants through the Model Context Protocol (MCP). This innovative solution addresses the growing need for accessible blockchain forensics in the DeFi ecosystem.
 
-## 🎯 Features
+**Core Innovation:**
+- **MCP Integration**: First-of-its-kind blockchain crime detection MCP server
+- **Multi-Chain Support**: Unified analysis across 4 major blockchain networks
+- **Natural Language Interface**: Complex blockchain analysis through simple conversations
+- **Real-Time Detection**: Live monitoring and analysis of suspicious activities
 
-### Multi-Chain Analysis
-- **Bitcoin**: Address analysis, transaction tracking, suspicious pattern detection
-- **Ethereum**: Smart contract analysis, rug pull detection, address investigation  
-- **Hedera**: Account analysis, transaction monitoring via Mirror Node API
-- **Solana**: Wallet analysis, pump & dump detection, token investigation
+**Technical Architecture:**
+- Built on Cloudflare Workers for global scalability and low latency
+- Implements MCP Streamable HTTP transport protocol
+- Integrates with multiple blockchain APIs (Etherscan, Helius, BlockCypher, Hedera Mirror Node)
+- Advanced pattern recognition algorithms for crime detection
+- Comprehensive risk scoring and reputation systems
 
-### Crime Detection Capabilities
-- **Risk Scoring**: Automated risk assessment (0-100 scale)
-- **Pattern Recognition**: High-frequency transactions, large value transfers
-- **Cross-Chain Correlation**: Link suspicious activities across blockchains
-- **Real-Time Analysis**: Live blockchain data integration
-- **Comprehensive Reports**: Multi-chain crime analysis reports
+**Use Cases:**
+- DeFi protocol security auditing
+- Cryptocurrency exchange compliance
+- Law enforcement blockchain investigations
+- Individual wallet security assessment
+- Cross-chain money laundering detection
 
----
+🚀 **Live Server**: https://chainguard-mcp-server.ndivij2004.workers.dev/mcp
 
-## 🚀 Quick Start
+## Hackathon Focus: MCPs + DeFi Automation
 
-### Option 1: Docker (Recommended)
-```bash
-# Pull and run the MCP server
-docker run -it divij/chainguard-mcp:latest
+This project directly addresses the hackathon's core theme by:
+- **MCP Integration**: Full Model Context Protocol implementation for seamless AI assistant integration
+- **DeFi Security**: Advanced crime detection algorithms for DeFi protocols and transactions
+- **Cross-Chain Analysis**: Multi-blockchain support for comprehensive security coverage
+- **Real-Time Detection**: Live analysis of suspicious activities and patterns
 
-# Send MCP protocol messages
-{"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2024-11-05", "capabilities": {}, "clientInfo": {"name": "test-client", "version": "1.0.0"}}}
-{"jsonrpc": "2.0", "method": "notifications/initialized", "params": {}}
-{"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}}
-```
+## 🔧 Quick Setup for Claude Desktop
 
-### Option 2: Local Setup
-```bash
-git clone https://github.com/yourusername/chainguard-mcp.git
-cd chainguard-mcp
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
-python server.py
-```
+### 1. Configure Claude Desktop
 
-### Option 3: Claude Desktop Integration
-Add to your Claude Desktop config:
+Add this configuration to your Claude Desktop settings (`claude_desktop_config.json`):
+
 ```json
 {
   "mcpServers": {
     "chainguard": {
-      "command": "docker",
-      "args": ["run", "-i", "--rm", "divij/chainguard-mcp:latest"]
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://chainguard-mcp-server.ndivij2004.workers.dev/mcp"
+      ]
     }
   }
 }
 ```
 
----
+### 2. Restart Claude Desktop
 
-## 🔧 Available Tools
+After adding the configuration, restart Claude Desktop. The ChainGuard tools will appear under the 🔨 Tools section.
 
-### Bitcoin Analysis
-- `analyze_bitcoin_address` - Comprehensive address risk assessment
-- `track_bitcoin_transaction` - Transaction pattern analysis
+### 3. Start Analyzing
 
-### Ethereum Investigation
-- `analyze_ethereum_address` - Smart contract and wallet analysis
-- `detect_ethereum_rug_pull` - Rug pull pattern detection
+Try these example prompts:
+- "Analyze Bitcoin address 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa for suspicious activity"
+- "Check Ethereum address 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045 for crime patterns"
+- "Generate a comprehensive crime report for multiple addresses"
 
-### Hedera Monitoring
-- `analyze_hedera_account` - Account activity analysis
-- `track_hedera_transaction` - Transaction monitoring
+## 🛠️ Available Tools (9 Total)
 
-### Solana Detection
-- `analyze_solana_address` - Wallet risk assessment
-- `detect_solana_pump_dump` - Pump & dump scheme detection
+| Tool | Description | Blockchain |
+|------|-------------|------------|
+| `analyze_bitcoin_address` | Bitcoin crime detection and transaction analysis | Bitcoin |
+| `analyze_ethereum_address` | Ethereum address analysis and smart contract risks | Ethereum |
+| `analyze_hedera_account` | Hedera account behavior and consensus analysis | Hedera |
+| `analyze_solana_wallet` | Solana wallet analysis and token risk detection | Solana |
+| `detect_rug_pull_ethereum` | Ethereum smart contract rug pull detection | Ethereum |
+| `detect_pump_dump_solana` | Solana token pump & dump scheme detection | Solana |
+| `analyze_cross_chain_activity` | Multi-chain suspicious activity correlation | All Chains |
+| `generate_crime_report` | Comprehensive forensic reports | All Chains |
+| `check_address_reputation` | Address reputation against crime databases | All Chains |
 
-### Cross-Chain Reports
-- `generate_crime_report` - Comprehensive multi-chain analysis
+## 📦 Install Steps
 
----
+### Prerequisites
 
-## 🧪 Testing
+- Node.js 18+ 
+- npm or yarn package manager
+- Cloudflare account (for deployment)
+- API keys (optional but recommended):
+  - [Etherscan API Key](https://etherscan.io/apis)
+  - [Helius API Key](https://helius.xyz/)
 
-### Test MCP Functionality
+### Installation
+
 ```bash
-python test_mcp.py
+# 1. Clone the repository
+git clone https://github.com/ndivij2004/MessariMCP.git
+cd MessariMCP
+
+# 2. Install dependencies
+npm install
+
+# 3. Copy environment variables template
+cp .env.example .env
+
+# 4. Build the project
+npm run build
+
+# 5. (Optional) Run locally for testing
+npx wrangler dev
 ```
 
-### Example Analysis
+## 🔐 Environment Variables
+
+The following environment variables are supported:
+
+| Variable | Description | Required | Default |
+|----------|-------------|----------|---------|
+| `ETHERSCAN_API_KEY` | Etherscan API key for enhanced Ethereum data | No | `YourApiKeyToken` |
+| `HELIUS_API_KEY` | Helius API key for enhanced Solana data | No | `demo` |
+| `BLOCKCYPHER_API_KEY` | BlockCypher API key for Bitcoin data | No | Not used |
+
+### Setting Environment Variables
+
+**For Local Development:**
 ```bash
-# Analyze Satoshi's Genesis address
-{"jsonrpc": "2.0", "id": 3, "method": "tools/call", "params": {"name": "analyze_bitcoin_address", "arguments": {"address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"}}}
+# Edit .env file
+ETHERSCAN_API_KEY=your_etherscan_api_key_here
+HELIUS_API_KEY=your_helius_api_key_here
 ```
 
----
+**For Production (Cloudflare Workers):**
+```bash
+# Set secrets for production deployment
+npx wrangler secret put ETHERSCAN_API_KEY
+npx wrangler secret put HELIUS_API_KEY
 
-## 🏗️ Architecture
+# Verify secrets are set
+npx wrangler secret list
+```
 
-- **MCP Protocol**: Standard Model Context Protocol implementation
-- **Multi-Chain APIs**: BlockCypher, Etherscan, Hedera Mirror Node, Helius
-- **Crime Detection**: Custom algorithms for pattern recognition
-- **Docker Ready**: Containerized for easy deployment
-- **Claude Desktop**: Native integration support
+### Deploy to Cloudflare Workers
 
----
+```bash
+# Deploy to production
+npx wrangler deploy
 
-## 🎪 Hackathon Submission
+# Check deployment status
+npx wrangler tail
+```
 
-### Problem Solved
-Blockchain crime detection is fragmented across different tools and chains. ChainGuard provides a unified, AI-accessible interface for comprehensive crime analysis.
+## 🔍 Key Features
 
-### Innovation
-- First MCP server for blockchain crime detection
-- Cross-chain correlation analysis
-- Natural language interface via Claude Desktop
-- Real-time risk scoring algorithms
+### Multi-Chain Crime Detection
+- **Bitcoin Analysis**: Transaction pattern analysis, mixer detection, and suspicious address identification
+- **Ethereum Security**: Smart contract rug pull detection, MEV analysis, and gas anomaly detection  
+- **Hedera Forensics**: Account behavior analysis and consensus timestamp verification
+- **Solana Monitoring**: Pump & dump detection, wallet clustering, and program analysis
 
-### Technical Excellence
-- Professional MCP implementation
-- Docker containerization
-- Comprehensive test suite
-- Multi-platform deployment ready
+### Advanced Detection Algorithms
+- **Pattern Recognition**: ML-powered detection of suspicious transaction patterns
+- **Risk Scoring**: Comprehensive risk assessment with weighted factors
+- **Cross-Chain Correlation**: Multi-blockchain activity pattern analysis
+- **Real-Time Monitoring**: Live detection of emerging threats and schemes
 
----
+## 💡 Usage Examples
 
-## 📊 Demo Results
+### Basic Address Analysis
+```
+User: "Analyze Bitcoin address 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa for suspicious activity"
 
-**Bitcoin Genesis Address Analysis:**
-- Balance: 104.32 BTC (~$4.7M)
-- Risk Score: 30/100 (moderate)
-- Transactions: 51,296
-- Status: High frequency activity detected
+ChainGuard Response:
+- Transaction count: 1,000+
+- Risk score: 15/100 (Low risk)
+- Notable patterns: Genesis block address, high historical significance
+- Recommendations: No suspicious activity detected
+```
 
----
+### Multi-Chain Investigation
+```
+User: "Generate a comprehensive crime report for these addresses: 
+- Bitcoin: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2
+- Ethereum: 0x742d35Cc6634C0532925a3b8D4C9db4C7b5d8B3E"
 
-## 🔑 API Keys (Optional)
+ChainGuard Response:
+- Cross-chain risk score: 75/100 (High risk)
+- Suspicious patterns detected across both chains
+- Timing correlations found in transaction patterns
+- Recommended for further investigation
+```
 
-For enhanced functionality, add API keys:
-- `ETHERSCAN_API_KEY` - Ethereum analysis
-- `HELIUS_API_KEY` - Solana analysis
-- Bitcoin and Hedera work without keys (public APIs)
+### DeFi Security Audit
+```
+User: "Check Ethereum contract 0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984 for rug pull risks"
 
----
+ChainGuard Response:
+- Contract verification: ✅ Verified source code
+- Ownership analysis: Decentralized governance
+- Liquidity risks: Low
+- Overall assessment: Safe for interaction
+```
+
+## ⚠️ Known Issues
+
+1. **API Rate Limits**: 
+   - Demo API keys have limited requests per minute
+   - Solution: Use your own API keys for production usage
+
+2. **Historical Data Limitations**:
+   - Some blockchain APIs limit historical transaction depth
+   - Impact: Older transactions may not be included in analysis
+
+3. **Cross-Chain Timing**:
+   - Different blockchain confirmation times affect real-time correlation
+   - Mitigation: Analysis includes timestamp normalization
+
+4. **False Positives**:
+   - High-volume legitimate addresses may trigger risk alerts
+   - Recommendation: Manual review for addresses with extreme activity
+
+5. **Network Dependencies**:
+   - Relies on external blockchain APIs (Etherscan, Helius, etc.)
+   - Impact: Service availability depends on upstream providers
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+**Claude Desktop not showing tools:**
+- Ensure `mcp-remote` is installed: `npm install -g mcp-remote`
+- Verify configuration in `claude_desktop_config.json`
+- Restart Claude Desktop after configuration changes
+
+**API errors:**
+- Check if API keys are properly set
+- Verify network connectivity
+- Check API provider status pages
+
+**Build failures:**
+- Ensure Node.js 18+ is installed
+- Clear node_modules and reinstall: `rm -rf node_modules && npm install`
+- Check TypeScript compilation: `npm run build`
+
+## 🏆 Hackathon Achievements
+
+- ✅ **Full MCP Implementation**: Complete Model Context Protocol server
+- ✅ **Multi-Chain Support**: Bitcoin, Ethereum, Hedera, Solana integration
+- ✅ **Production Ready**: Deployed on Cloudflare Workers with API key management
+- ✅ **Natural Language Interface**: Seamless Claude Desktop integration
+- ✅ **Advanced Analytics**: Sophisticated crime detection algorithms
+- ✅ **Real-Time Analysis**: Live blockchain monitoring capabilities
 
 ## 📄 License
 
-MIT License - See [LICENSE](LICENSE) file for details.
+MIT License - See LICENSE file for details
+
+## 👤 Project Information
+
+- **Primary Contact**: N DIVIJ (@holaworked - Telegram)
+- **Team**: Solo
+- **Project Title**: ChainGuard - Multi-Chain Blockchain Crime Detection MCP Server
 
 ---
-
-## 🏆 Aya AI Hackathon
-
-**Team**: Solo Developer  
-**Category**: MCPs + DeFi Automation  
-**Submission Date**: September 2025  
-**Demo**: Available via Docker and Claude Desktop integration
