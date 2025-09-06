@@ -1,111 +1,161 @@
-# Messari Influencer Mindshare and Asset Analysis
+# 🛡️ ChainGuard - Multi-Chain Crime Detection MCP Server
 
-This repository contains a Python script for analyzing mindshare data of cryptocurrency assets using the Messari API. The script fetches mindshare data, performs anomaly detection, visualizes trends, and provides insights into significant spikes in attention for a given asset. The analysis is tailored for use in Google Colab, with plotting and readable insights displayed directly in the notebook.
+**Aya AI Hackathon Taipei Edition Submission**
 
----
-
-## Overview
-
-The Python script provides several functions to facilitate mindshare analysis for both cryptocurrency assets and Key Opinion Leaders (KOLs) on social media platforms like Twitter. Below is a description of each function:
+ChainGuard is a comprehensive blockchain crime detection system built as an MCP (Model Context Protocol) server. It provides real-time analysis and risk assessment across Bitcoin, Ethereum, Hedera, and Solana networks to identify suspicious activities, fraud patterns, and criminal behavior.
 
 ---
 
-#### `call_mistral`
+## 🎯 Features
 
-- **Purpose**: Interacts with the Mistral API to perform **sentiment analysis** on text data (e.g., summaries of trending topics).
-- **Returns**: A JSON object with the sentiment (`positive`, `negative`, or `neutral`) and an insight into how the topic may influence crypto market attention.
-- **Features**:
-  - Includes **retry logic** for handling rate limits.
-  - Caches responses to **avoid redundant API calls**.
-- **Used In**: KOL mindshare analysis to explain **anomalies** by sentiment-analyzing related trending topics.
+### Multi-Chain Analysis
+- **Bitcoin**: Address analysis, transaction tracking, suspicious pattern detection
+- **Ethereum**: Smart contract analysis, rug pull detection, address investigation  
+- **Hedera**: Account analysis, transaction monitoring via Mirror Node API
+- **Solana**: Wallet analysis, pump & dump detection, token investigation
 
----
-
-#### `get_trending_details`
-
-- **Purpose**: Fetches **trending topics** from the Messari API within a given date range and topic classes (e.g., `"Macro Commentary, Project Announcements, Legal and Regulatory"`).
-- **Returns**: A dictionary of trending topics for the specified criteria.
-- **Used For**: Providing context for **mindshare anomalies** in the KOL analysis by correlating spikes with relevant market news and events.
+### Crime Detection Capabilities
+- **Risk Scoring**: Automated risk assessment (0-100 scale)
+- **Pattern Recognition**: High-frequency transactions, large value transfers
+- **Cross-Chain Correlation**: Link suspicious activities across blockchains
+- **Real-Time Analysis**: Live blockchain data integration
+- **Comprehensive Reports**: Multi-chain crime analysis reports
 
 ---
 
-#### `analyze_mindshare_data`
+## 🚀 Quick Start
 
-- **Purpose**: Retrieves **mindshare data** for a specific Twitter handle (e.g., `@AltcoinGordon`) from the Messari API.
-- **Processes**:
-  - Detects **anomalies** in mindshare scores using **z-scores** (default threshold: `2.0`).
-  - **Plots** mindshare scores over time with anomalies **highlighted in red**.
-  - Provides insights on:
-    - **Trends** (upward/downward/stable)
-    - **Score and rank ranges**
-    - **List of anomalies**
-  - Uses `call_mistral` + `get_trending_details` to add **sentiment + market explanation** to detected anomalies.
-- **Display**: Results are shown **directly in Google Colab**.
-- **Best For**: KOL mindshare tracking and insight generation.
+### Option 1: Docker (Recommended)
+```bash
+# Pull and run the MCP server
+docker run -it divij/chainguard-mcp:latest
 
----
+# Send MCP protocol messages
+{"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2024-11-05", "capabilities": {}, "clientInfo": {"name": "test-client", "version": "1.0.0"}}}
+{"jsonrpc": "2.0", "method": "notifications/initialized", "params": {}}
+{"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}}
+```
 
-#### `analyze_asset_mindshare`
+### Option 2: Local Setup
+```bash
+git clone https://github.com/yourusername/chainguard-mcp.git
+cd chainguard-mcp
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python server.py
+```
 
-- **Purpose**: Retrieves **mindshare data** for a specific cryptocurrency asset (e.g., `official-trump` for $TRUMP, `mantra-dao` for $OM).
-- **Processes**:
-  - Detects **anomalies** in asset mindshare scores using **z-scores** (default threshold: `2.0`).
-  - **Plots** scores over time with anomalies **highlighted in orange**.
-  - Provides concise insights about:
-    - **Mindshare trends**
-    - **Score and rank ranges**
-    - **Anomaly dates and scores**
-- **Display**: Designed to work **directly in Google Colab** for interactive visual exploration.
-- **Best For**: Analyzing market attention shifts for individual crypto assets.
-
----
-
-## 🚀 Running the MCP Server
-
-The MCP Server provides a backend for broader mindshare comparison functionality.
-
-- Navigate to the server code: `server.py`
-- Ensure the Messari API key is configured correctly.
+### Option 3: Claude Desktop Integration
+Add to your Claude Desktop config:
+```json
+{
+  "mcpServers": {
+    "chainguard": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "divij/chainguard-mcp:latest"]
+    }
+  }
+}
+```
 
 ---
 
-## API List
+## 🔧 Available Tools
 
-The following APIs are used in this project:
+### Bitcoin Analysis
+- `analyze_bitcoin_address` - Comprehensive address risk assessment
+- `track_bitcoin_transaction` - Transaction pattern analysis
 
-- **Copilot Agent API**
-- **Current Topics API**
-- **X-Users Mindshare Over Time API**
-- **Mindshare of Asset Over Time API**
-- **Asset Details API**
+### Ethereum Investigation
+- `analyze_ethereum_address` - Smart contract and wallet analysis
+- `detect_ethereum_rug_pull` - Rug pull pattern detection
+
+### Hedera Monitoring
+- `analyze_hedera_account` - Account activity analysis
+- `track_hedera_transaction` - Transaction monitoring
+
+### Solana Detection
+- `analyze_solana_address` - Wallet risk assessment
+- `detect_solana_pump_dump` - Pump & dump scheme detection
+
+### Cross-Chain Reports
+- `generate_crime_report` - Comprehensive multi-chain analysis
 
 ---
 
-## 🔑 Key Features
+## 🧪 Testing
 
-- **Mindshare Data Fetching**: Uses the Messari API to retrieve daily mindshare data for assets.
-- **Anomaly Detection**: Identifies significant spikes in mindshare scores using a z-score threshold (default: 2.0).
-- **Visualization**: Plots mindshare scores over time with anomalies highlighted in Google Colab.
-- **Insights**: Provides readable insights about trends, score ranges, rank ranges, and anomalies.
-- **Extensible**: Designed to work alongside KOL mindshare analysis (e.g., for Twitter handles) with potential for combined analysis.
+### Test MCP Functionality
+```bash
+python test_mcp.py
+```
+
+### Example Analysis
+```bash
+# Analyze Satoshi's Genesis address
+{"jsonrpc": "2.0", "id": 3, "method": "tools/call", "params": {"name": "analyze_bitcoin_address", "arguments": {"address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"}}}
+```
 
 ---
 
-## 📂 Code Links in the repository
+## 🏗️ Architecture
 
-- **Colab Notebook**: [LLM_Mindshare_asset_analysis.ipynb](https://github.com/N-45div/MessariMCP/blob/main/colab/LLM_Mindshare_asset_analysis.ipynb)
-- **MCP Server Code**: [server.py](https://github.com/N-45div/MessariMCP/blob/main/server.py)
+- **MCP Protocol**: Standard Model Context Protocol implementation
+- **Multi-Chain APIs**: BlockCypher, Etherscan, Hedera Mirror Node, Helius
+- **Crime Detection**: Custom algorithms for pattern recognition
+- **Docker Ready**: Containerized for easy deployment
+- **Claude Desktop**: Native integration support
+
+---
+
+## 🎪 Hackathon Submission
+
+### Problem Solved
+Blockchain crime detection is fragmented across different tools and chains. ChainGuard provides a unified, AI-accessible interface for comprehensive crime analysis.
+
+### Innovation
+- First MCP server for blockchain crime detection
+- Cross-chain correlation analysis
+- Natural language interface via Claude Desktop
+- Real-time risk scoring algorithms
+
+### Technical Excellence
+- Professional MCP implementation
+- Docker containerization
+- Comprehensive test suite
+- Multi-platform deployment ready
+
+---
+
+## 📊 Demo Results
+
+**Bitcoin Genesis Address Analysis:**
+- Balance: 104.32 BTC (~$4.7M)
+- Risk Score: 30/100 (moderate)
+- Transactions: 51,296
+- Status: High frequency activity detected
+
+---
+
+## 🔑 API Keys (Optional)
+
+For enhanced functionality, add API keys:
+- `ETHERSCAN_API_KEY` - Ethereum analysis
+- `HELIUS_API_KEY` - Solana analysis
+- Bitcoin and Hedera work without keys (public APIs)
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+MIT License - See [LICENSE](LICENSE) file for details.
 
 ---
 
-## Acknowledgments
+## 🏆 Aya AI Hackathon
 
-- **Messari**: For providing the API.
-- **Google Colab**: For enabling interactive visualization.
-- **Mistral AI**: For optional sentiment integration.
+**Team**: Solo Developer  
+**Category**: MCPs + DeFi Automation  
+**Submission Date**: September 2025  
+**Demo**: Available via Docker and Claude Desktop integration

@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  chainguard-mcp:
+    build: .
+    container_name: chainguard-mcp-server
+    stdin_open: true
+    tty: true
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONIOENCODING=utf-8
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped

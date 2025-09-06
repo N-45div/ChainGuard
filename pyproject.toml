@@ -1,10 +1,11 @@
 [project]
-name = "messmcp"
-version = "0.1.0"
-description = "Add your description here"
+name = "chainguard-crime-detector"
+version = "1.0.0"
+description = "Multi-chain blockchain crime detection MCP server for Bitcoin, Ethereum, Hedera, and Solana"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.8"
 dependencies = [
-    "httpx>=0.28.1",
+    "requests>=2.31.0",
     "mcp[cli]>=1.6.0",
+    "fastmcp>=0.1.0",
 ]
