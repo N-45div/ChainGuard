@@ -261,5 +261,3 @@ MIT License - See LICENSE file for details
 - **Primary Contact**: N DIVIJ (@holaworked - Telegram)
 - **Team**: Solo
 - **Project Title**: ChainGuard - Multi-Chain Blockchain Crime Detection MCP Server
-
----
